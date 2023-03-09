@@ -1,9 +1,9 @@
-export default interface AppConfig {
+export interface AppConfig {
   domain: string;
   port: number;
 }
 
-export default interface DbConfig {
+export interface DbConfig {
   host: string;
   port: number;
   username: string;
