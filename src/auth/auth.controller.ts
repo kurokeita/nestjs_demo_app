@@ -38,6 +38,7 @@ export class AuthController {
     return res.status(HttpStatus.CREATED).send(user);
   }
 
+  @Public()
   @UseGuards(LocalAuthGuard)
   @Post('/login')
   async login(@Req() req: Request, @Res() res: Response): Promise<any> {
@@ -48,8 +49,6 @@ export class AuthController {
 
   @Get('/me')
   async me(@Req() req: Request, @Res() res: Response): Promise<any> {
-    console.log(req.user);
-
     return res.status(HttpStatus.OK).send(req.user);
   }
 }
