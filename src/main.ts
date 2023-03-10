@@ -10,9 +10,11 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
   app.useGlobalGuards(new JwtAuthGuard(app.get(Reflector)));
-  app.useGlobalPipes(new ValidationPipe({
-    transform: true,
-  }));
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+    }),
+  );
 
   const appConfig = app.get(ConfigService).get<AppConfig>('app');
 

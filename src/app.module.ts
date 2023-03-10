@@ -29,18 +29,18 @@ import { UserModule } from './users/users.module';
           {
             path: 'users',
             module: UserModule,
-          }
-        ]
+          },
+        ],
       },
-    ])
+    ]),
   ],
   controllers: [AppController],
   providers: [
     {
       provide: APP_GUARD,
-      useClass: JwtStrategy
+      useClass: JwtStrategy,
     },
     AppService,
   ],
 })
-export class AppModule { }
+export class AppModule {}
