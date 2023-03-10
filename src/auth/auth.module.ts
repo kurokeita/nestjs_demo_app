@@ -1,10 +1,11 @@
 import { Module } from "@nestjs/common";
-import { UserService } from "src/users/users.service";
+import { UserModule } from "src/users/users.module";
 import { AuthController } from "./auth.controller";
+import { IsUniqueEmailConstraint } from "./validators/email_unique.validator";
 
 @Module({
-  imports: [],
+  imports: [UserModule],
   controllers: [AuthController],
-  providers: [UserService],
+  providers: [IsUniqueEmailConstraint],
 })
 export class AuthModule { }
