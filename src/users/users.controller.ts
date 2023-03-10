@@ -22,6 +22,7 @@ export class UserController {
     const user = await this.userService.user({ id });
 
     if (user) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { password, ...rest } = user;
       return res.status(HttpStatus.OK).send(rest);
     }
