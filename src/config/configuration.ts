@@ -11,6 +11,8 @@ export default () => ({
     database: process.env.DB_DATABASE,
   },
   jwt: {
-    secret: process.env.JWT_SECRET,
+    access_token_private_key: process.env.JWT_PRIVATE_KEY,
+    access_token_public_key: process.env.JWT_PUBLIC_KEY,
+    access_token_expiration_time: process.env.JWT_EXPIRATION_TIME,
   },
 });
