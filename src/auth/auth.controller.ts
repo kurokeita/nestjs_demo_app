@@ -1,14 +1,20 @@
-import { Body, Controller, HttpStatus, Post, Res } from "@nestjs/common";
-import { Response } from "express";
+import { Body, Controller, Get, HttpStatus, Post, Req, Res, UseGuards } from "@nestjs/common";
+import { Request, Response } from "express";
 import { UserService } from "src/users/users.service";
 import { RegisterDto } from "./dto/register.dto";
 import * as bcrypt from 'bcrypt'
-import { LoginDto } from "./dto/login.dto";
+import { LocalAuthGuard } from "./guards/localAuth.guard";
+import { AuthService } from "./auth.service";
+import { Public } from "./public.decorator";
 
 @Controller()
 export class AuthController {
-  constructor(private readonly userService: UserService) { }
+  constructor(
+    private readonly userService: UserService,
+    private readonly authService: AuthService
+  ) { }
 
+  @Public()
   @Post('/register')
   async register(
     @Body() registerDto: RegisterDto,
@@ -20,17 +26,22 @@ export class AuthController {
     return res.status(HttpStatus.CREATED).send(user)
   }
 
+  @UseGuards(LocalAuthGuard)
   @Post('/login')
   async login(
-    @Body() loginDto: LoginDto,
+    @Req() req: Request,
     @Res() res: Response
-  ): Promise<Response> {
-    const user = await this.userService.user({ email: loginDto.email })
+  ): Promise<any> {
+    return res.status(HttpStatus.OK).send(await this.authService.login(req.user))
+  }
 
-    if (user && await bcrypt.compare(loginDto.password, user.password)) {
-      return res.status(HttpStatus.OK).send({ message: 'Logged in' })
-    }
+  @Get('/me')
+  async me(
+    @Req() req: Request,
+    @Res() res: Response
+  ): Promise<any> {
+    console.log(req.user);
 
-    return res.status(HttpStatus.UNAUTHORIZED).send({ message: 'Invalid credentials' })
+    return res.status(HttpStatus.OK).send(req.user)
   }
 }
