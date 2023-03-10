@@ -5,7 +5,7 @@ import { RegisterDto } from "./dto/register.dto";
 import * as bcrypt from 'bcrypt'
 import { LoginDto } from "./dto/login.dto";
 
-@Controller("api/auth")
+@Controller()
 export class AuthController {
   constructor(private readonly userService: UserService) { }
 
