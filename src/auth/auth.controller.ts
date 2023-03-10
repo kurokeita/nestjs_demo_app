@@ -4,10 +4,14 @@ import { UserService } from "src/users/users.service";
 import { RegisterDto } from "./dto/register.dto";
 import * as bcrypt from 'bcrypt'
 import { LocalAuthGuard } from "./localAuth.guard";
+import { AuthService } from "./auth.service";
 
 @Controller()
 export class AuthController {
-  constructor(private readonly userService: UserService) { }
+  constructor(
+    private readonly userService: UserService,
+    private readonly authService: AuthService
+  ) { }
 
   @Post('/register')
   async register(
@@ -25,7 +29,7 @@ export class AuthController {
   async login(
     @Req() req: Request,
     @Res() res: Response
-  ): Promise<Response> {
-    return res.status(HttpStatus.OK).send(req.user)
+  ): Promise<any> {
+    return res.status(HttpStatus.OK).send(await this.authService.login(req.user))
   }
 }
