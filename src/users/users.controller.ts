@@ -3,7 +3,7 @@ import { User } from "@prisma/client";
 import { UserService } from "./users.service";
 import { Response } from "express";
 
-@Controller("api/users")
+@Controller()
 export class UserController {
   constructor(private readonly userService: UserService) { }
 
