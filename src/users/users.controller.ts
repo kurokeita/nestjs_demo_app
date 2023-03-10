@@ -1,5 +1,4 @@
 import { Controller, Get, HttpStatus, Param, Res } from "@nestjs/common";
-import { User } from "@prisma/client";
 import { UserService } from "./users.service";
 import { Response } from "express";
 
@@ -28,7 +27,8 @@ export class UserController {
     const user = await this.userService.user({ id })
 
     if (user) {
-      return res.status(HttpStatus.OK).send(user)
+      const { password, ...rest } = user
+      return res.status(HttpStatus.OK).send(rest)
     }
 
     return res.status(HttpStatus.NOT_FOUND).send({ message: 'User not found' })

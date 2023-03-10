@@ -5,7 +5,8 @@ import { PassportModule } from "@nestjs/passport";
 import { UserModule } from "src/users/users.module";
 import { AuthController } from "./auth.controller";
 import { AuthService } from "./auth.service";
-import { LocalStrategy } from "./local.strategy";
+import { JwtStrategy } from "./strategies/jwt.strategy";
+import { LocalStrategy } from "./strategies/local.strategy";
 import { IsUniqueEmailConstraint } from "./validators/email_unique.validator";
 
 @Module({
@@ -22,6 +23,11 @@ import { IsUniqueEmailConstraint } from "./validators/email_unique.validator";
     })
   ],
   controllers: [AuthController],
-  providers: [IsUniqueEmailConstraint, AuthService, LocalStrategy],
+  providers: [
+    IsUniqueEmailConstraint,
+    AuthService,
+    LocalStrategy,
+    JwtStrategy,
+  ],
 })
 export class AuthModule { }
