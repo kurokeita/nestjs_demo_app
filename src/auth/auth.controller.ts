@@ -8,12 +8,12 @@ import {
   Res,
   UseGuards,
 } from '@nestjs/common';
+import * as bcrypt from 'bcrypt';
 import { Request, Response } from 'express';
 import { UserService } from 'src/users/users.service';
-import { RegisterDto } from './dto/register.dto';
-import * as bcrypt from 'bcrypt';
-import { LocalAuthGuard } from './guards/localAuth.guard';
 import { AuthService } from './auth.service';
+import { RegisterDto } from './dto/register.dto';
+import { LocalAuthGuard } from './guards/localAuth.guard';
 import { Public } from './public.decorator';
 
 @Controller()

@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { UserService } from 'src/users/users.service';
 import * as bcrypt from 'bcrypt';
-import { JwtService } from '@nestjs/jwt';
+import { UserService } from 'src/users/users.service';
+import { TokenService } from './token.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly userService: UserService,
-    private readonly jwtService: JwtService,
+    private readonly tokenService: TokenService,
   ) {}
 
   async validateUser(email: string, password: string): Promise<any> {
@@ -30,7 +30,7 @@ export class AuthService {
     };
 
     return {
-      access_token: this.jwtService.sign(payload),
+      access_token: this.tokenService.sign(payload),
     };
   }
 }

@@ -9,7 +9,8 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": true,
+    "source.organizeImports": true
   },
   "eslint.format.enable": true,
   "eslint.run": "onSave",
@@ -20,5 +21,8 @@
     }
   ],
   "eslint.codeActionsOnSave.mode": "all",
-  "eslint.packageManager": "yarn"
+  "eslint.packageManager": "yarn",
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

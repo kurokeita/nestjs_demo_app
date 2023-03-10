@@ -7,6 +7,7 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { LocalStrategy } from './strategies/local.strategy';
+import { TokenService } from './token.service';
 import { IsUniqueEmailConstraint } from './validators/email_unique.validator';
 
 @Module({
@@ -33,6 +34,12 @@ import { IsUniqueEmailConstraint } from './validators/email_unique.validator';
     }),
   ],
   controllers: [AuthController],
-  providers: [IsUniqueEmailConstraint, AuthService, LocalStrategy, JwtStrategy],
+  providers: [
+    IsUniqueEmailConstraint,
+    AuthService,
+    TokenService,
+    LocalStrategy,
+    JwtStrategy,
+  ],
 })
 export class AuthModule {}
