@@ -1,5 +1,12 @@
-import { IsEmail, IsNotEmpty, IsOptional, IsString, IsStrongPassword, Length } from "class-validator";
-import { IsUniqueEmail } from "../validators/email_unique.validator";
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  IsStrongPassword,
+  Length,
+} from 'class-validator';
+import { IsUniqueEmail } from '../validators/email_unique.validator';
 
 export class RegisterDto {
   @IsOptional()
@@ -9,7 +16,7 @@ export class RegisterDto {
   @IsEmail()
   @IsNotEmpty()
   @IsUniqueEmail({
-    message: 'email $value already exists'
+    message: 'email $value already exists',
   })
   email: string;
 

@@ -1,19 +1,24 @@
-import { Injectable } from "@nestjs/common";
-import { registerDecorator, ValidationArguments, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface } from "class-validator";
-import { UserService } from "src/users/users.service";
+import { Injectable } from '@nestjs/common';
+import {
+  registerDecorator,
+  ValidationOptions,
+  ValidatorConstraint,
+  ValidatorConstraintInterface,
+} from 'class-validator';
+import { UserService } from 'src/users/users.service';
 
 @ValidatorConstraint({ async: true })
 @Injectable()
 export class IsUniqueEmailConstraint implements ValidatorConstraintInterface {
-  constructor(private readonly userService: UserService) { }
+  constructor(private readonly userService: UserService) {}
 
-  async validate(email: any, args: ValidationArguments) {
-    return await this.userService.user({ email: email }) === null;
+  async validate(email: any) {
+    return (await this.userService.user({ email: email })) === null;
   }
 }
 
 export function IsUniqueEmail(validationOptions?: ValidationOptions) {
-  return function (object: Object, propertyName: string) {
+  return function (object: object, propertyName: string) {
     registerDecorator({
       target: object.constructor,
       propertyName: propertyName,
@@ -21,5 +26,5 @@ export function IsUniqueEmail(validationOptions?: ValidationOptions) {
       constraints: [],
       validator: IsUniqueEmailConstraint,
     });
-  }
+  };
 }
