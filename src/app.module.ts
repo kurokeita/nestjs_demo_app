@@ -19,12 +19,12 @@ import { UserModule } from './users/users.module';
     UserModule,
     RouterModule.register([
       {
+        path: 'auth',
+        module: AuthModule,
+      },
+      {
         path: 'api',
         children: [
-          {
-            path: 'auth',
-            module: AuthModule,
-          },
           {
             path: 'users',
             module: UserModule,
