@@ -31,6 +31,7 @@ export class AuthService {
 
     return {
       access_token: this.tokenService.sign(payload),
+      refresh_token: await this.tokenService.createRefreshToken(user),
     };
   }
 }
