@@ -69,6 +69,7 @@ export class AuthService {
     try {
       return this.tokenService.verify(token);
     } catch (e) {
+      // TODO: need better way to check for exeption type
       if (e.name !== 'TokenExpiredError') {
         throw new UnauthorizedException();
       }
