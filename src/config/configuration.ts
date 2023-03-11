@@ -19,5 +19,6 @@ export default () => ({
     access_token_private_key: privateKey,
     access_token_public_key: publicKey,
     access_token_expiration_time: process.env.JWT_EXPIRATION_TIME,
+    refresh_token_expirationo_time: process.env.REFRESH_TOKEN_EXPIRATION_TIME,
   },
 });
