@@ -25,6 +25,8 @@ services:
   prod:
     container_name: nestjs_api_prod
     image: nestjs-api-prod
+    profiles:
+      - prod
     build:
       context: .
       target: production

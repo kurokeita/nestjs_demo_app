@@ -23,7 +23,8 @@
         "codezombiech.gitignore",
         "esbenp.prettier-vscode",
         "ashinzekene.nestjs",
-        "mikestead.dotenv"
+        "mikestead.dotenv",
+        "Prisma.prisma"
       ]
     }
   },
