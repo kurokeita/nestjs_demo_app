@@ -60,7 +60,7 @@ export class AuthService {
       id: decodedJwtAccessToken.sub,
     });
 
-    this.tokenService.invalidateRefreshToken(refreshToken);
+    await this.tokenService.invalidateRefreshToken(refreshToken);
 
     return this.login(user);
   }
