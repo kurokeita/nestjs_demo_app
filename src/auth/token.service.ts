@@ -47,14 +47,12 @@ export class TokenService {
     token: string,
     userId: number,
   ): Promise<RefreshToken | null> {
-    const refreshToken = await this.prisma.refreshToken.findFirst({
+    return await this.prisma.refreshToken.findFirst({
       where: {
         user_id: userId,
         token: token,
       },
     });
-
-    return refreshToken;
   }
 
   async invalidateRefreshToken(token: RefreshToken | string) {

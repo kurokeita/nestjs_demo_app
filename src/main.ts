@@ -5,6 +5,7 @@ import { useContainer } from 'class-validator';
 import { AppModule } from './app.module';
 import { JwtAuthGuard } from './auth/guards/jwtAuth.guard';
 import { AppConfig } from './config/types';
+import { PrismaService } from './db/prisma.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -15,6 +16,9 @@ async function bootstrap() {
       transform: true,
     }),
   );
+
+  const prismaService = app.get(PrismaService);
+  await prismaService.enableShutdownHooks(app);
 
   const appConfig = app.get(ConfigService).get<AppConfig>('app');
 
