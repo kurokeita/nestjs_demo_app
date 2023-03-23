@@ -9,6 +9,8 @@ USER node
 
 WORKDIR /app
 
+COPY --chown=node:node .env.example /app/
+
 COPY --chown=node:node package.json yarn.lock /app/
 
 COPY --chown=node:node . .
