@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD, RouterModule } from '@nestjs/core';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { JwtStrategy } from './auth/strategies/jwt.strategy';
 import configuration from './config/configuration';
@@ -34,13 +32,12 @@ import { UserModule } from './users/users.module';
       },
     ]),
   ],
-  controllers: [AppController],
+  controllers: [],
   providers: [
     {
       provide: APP_GUARD,
       useClass: JwtStrategy,
     },
-    AppService,
   ],
 })
 export class AppModule {}
