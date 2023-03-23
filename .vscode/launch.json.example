@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "name": "Attach to remote",
+      "address": "localhost:9229/b4500b53-d21d-4b7f-b5ed-cb358b7b7e23",
+      "port": 9229,
+      "remoteRoot": "/app/",
+      "request": "attach",
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
+    }
+  ]
+}
