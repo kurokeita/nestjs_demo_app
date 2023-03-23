@@ -24,7 +24,10 @@
         "esbenp.prettier-vscode",
         "ashinzekene.nestjs",
         "mikestead.dotenv",
-        "Prisma.prisma"
+        "Prisma.prisma",
+        "GitHub.copilot",
+        "GitHub.vscode-pull-request-github",
+        "eamodio.gitlens"
       ]
     }
   },
