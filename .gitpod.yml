@@ -11,11 +11,14 @@ tasks:
       yarn install
       yarn prisma:generate
       yarn build
-      export DATABASE_URL="mysql://root@localhost:3306/nestjs_app"
+      gp env DATABASE_URL="mysql://root@localhost:3306/nestjs_app"
+      gp env APP_PORT=3000
+      gp env JWT_EXPIRATION_TIME=900
+      gp env REFRESH_TOKEN_EXPIRATION_TIME=864000
+      eval $(gp env -e)
       yarn prisma:dev
       yarn prisma db seed
     command: |
-      cp .env.example .env
       yarn prisma:dev
       yarn start:debug
 
