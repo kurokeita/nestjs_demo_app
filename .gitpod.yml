@@ -11,7 +11,7 @@ tasks:
       yarn install
       yarn prisma:generate
       yarn build
-      export DATABASE_URL="mysql://root@localhost:3306"
+      export DATABASE_URL="mysql://root@localhost:3306/nestjs_app"
       yarn prisma:dev
       yarn prisma db seed
     command: |
