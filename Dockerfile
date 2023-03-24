@@ -15,14 +15,12 @@ COPY --chown=node:node package.json yarn.lock /app/
 
 COPY --chown=node:node . .
 
-RUN |
-  openssl genrsa -out storage/oauth/private.pem 2048
-  openssl rsa -in storage/oauth/private.pem -pubout -out storage/oauth/public.crt
+RUN openssl genrsa -out storage/oauth/private.pem 2048 \
+  && openssl rsa -in storage/oauth/private.pem -pubout -out storage/oauth/public.crt
 
-RUN |
-  yarn install
-  yarn prisma:generate
-  yarn build
+RUN yarn install \
+  && yarn prisma:generate \
+  && yarn build
 
 EXPOSE 3000 5555 9229
 
