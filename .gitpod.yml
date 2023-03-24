@@ -11,7 +11,7 @@ tasks:
       yarn install
       yarn prisma:generate
       yarn build
-      gp env DATABASE_URL="mysql://root@localhost:3306"
+      export DATABASE_URL="mysql://root@localhost:3306"
       yarn prisma:dev
       yarn prisma db seed
     command: |
