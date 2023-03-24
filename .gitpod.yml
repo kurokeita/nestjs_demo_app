@@ -5,5 +5,5 @@
 # Learn more from ready-to-use templates: https://www.gitpod.io/docs/introduction/getting-started/quickstart
 
 tasks:
-  - init: docker compose up dev
-    # command: yarn run start:dev
+  - init: docker compose up -d db && yarn install
+    command: yarn prisma:generate && prisma:dev && yarn run start:dev
