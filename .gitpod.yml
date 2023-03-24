@@ -11,8 +11,10 @@ tasks:
       yarn install
       yarn prisma:generate
       yarn build
-    command: |
       cp .env.example .env
+      yarn prisma:dev
+      yarn prisma db seed
+    command: |
       yarn prisma:dev
       yarn start:debug
 
