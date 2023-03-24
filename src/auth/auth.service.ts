@@ -53,7 +53,7 @@ export class AuthService {
     );
 
     if (!refreshToken) {
-      return null;
+      throw new UnauthorizedException();
     }
 
     const user = await this.userService.user({

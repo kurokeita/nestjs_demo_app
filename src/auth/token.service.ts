@@ -51,6 +51,9 @@ export class TokenService {
       where: {
         user_id: userId,
         token: token,
+        expired_at: {
+          gte: moment().toDate(),
+        },
       },
     });
   }
@@ -69,5 +72,15 @@ export class TokenService {
         },
       });
     }
+  }
+
+  async deleteExpiredRefreshTokens() {
+    await this.prisma.refreshToken.deleteMany({
+      where: {
+        expired_at: {
+          lte: moment().toDate(),
+        },
+      },
+    });
   }
 }
