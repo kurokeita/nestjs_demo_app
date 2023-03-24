@@ -5,5 +5,60 @@
 # Learn more from ready-to-use templates: https://www.gitpod.io/docs/introduction/getting-started/quickstart
 
 tasks:
-  - init: docker compose up -d db && yarn install
-    command: yarn prisma:generate && prisma:dev && yarn run start:dev
+  - init: |
+      openssl genrsa -out storage/oauth/private.pem 2048
+      openssl rsa -in storage/oauth/private.pem -pubout -out storage/oauth/public.crt
+    command: >
+      while [ -z "$APP_PORT" ] ; do
+        printf "\n❗ The APP_PORT environment variable is required. Please enter its value.\n" &&
+        read -s -p "APP_PORT: " APP_PORT ;
+      done ; gp env APP_PORT=$APP_PORT && printf "\nThanks\n"
+      while [ -z "$DB_HOST" ] ; do
+        printf "\n❗ The DB_HOST environment variable is required. Please enter its value.\n" &&
+        read -s -p "DB_HOST: " DB_HOST ;
+      done ; gp env DB_HOST=$DB_HOST && printf "\nThanks\n"
+      while [ -z "$DB_PORT" ] ; do
+        printf "\n❗ The DB_PORT environment variable is required. Please enter its value.\n" &&
+        read -s -p "DB_PORT: " DB_PORT ;
+      done ; gp env DB_PORT=$DB_PORT && printf "\nThanks\n"
+      while [ -z "$DB_USERNAME" ] ; do
+        printf "\n❗ The DB_USERNAME environment variable is required. Please enter its value.\n" &&
+        read -s -p "DB_USERNAME: " DB_USERNAME ;
+      done ; gp env DB_USERNAME=$DB_USERNAME && printf "\nThanks\n"
+      while [ -z "$DB_PASSWORD" ] ; do
+        printf "\n❗ The DB_PASSWORD environment variable is required. Please enter its value.\n" &&
+        read -s -p "DB_PASSWORD: " DB_PASSWORD ;
+      done ; gp env DB_PASSWORD=$DB_PASSWORD && printf "\nThanks\n"
+      while [ -z "$DB_DATABASE" ] ; do
+        printf "\n❗ The DB_DATABASE environment variable is required. Please enter its value.\n" &&
+        read -s -p "DB_DATABASE: " DB_DATABASE ;
+      done ; gp env DB_DATABASE=$DB_DATABASE && printf "\nThanks\n"
+      while [ -z "$DATABASE_URL" ] ; do
+        printf "\n❗ The DATABASE_URL environment variable is required. Please enter its value.\n" &&
+        read -s -p "DATABASE_URL: " DATABASE_URL ;
+      done ; gp env DATABASE_URL=$DATABASE_URL && printf "\nThanks\n"
+      while [ -z "$JWT_EXPIRATION_TIME" ] ; do
+        printf "\n❗ The JWT_EXPIRATION_TIME environment variable is required. Please enter its value.\n" &&
+        read -s -p "JWT_EXPIRATION_TIME: " JWT_EXPIRATION_TIME ;
+      done ; gp env JWT_EXPIRATION_TIME=$JWT_EXPIRATION_TIME && printf "\nThanks\n"
+      while [ -z "$REFRESH_TOKEN_EXPIRATION_TIME" ] ; do
+        printf "\n❗ The REFRESH_TOKEN_EXPIRATION_TIME environment variable is required. Please enter its value.\n" &&
+        read -s -p "REFRESH_TOKEN_EXPIRATION_TIME: " REFRESH_TOKEN_EXPIRATION_TIME ;
+      done ; gp env REFRESH_TOKEN_EXPIRATION_TIME=$REFRESH_TOKEN_EXPIRATION_TIME && printf "\nThanks\n"
+      gp sync-done setup_env
+  - init: gp sync-await setup_env
+    command: |
+      yarn install
+      yarn prisma:generate
+      yarn prisma:dev
+      yarn start:debug
+
+image: gitpod/workspace-mysql
+
+github:
+  prebuilds:
+    master: true
+    branches: false
+    pullRequests: true
+    addCheck: true
+    addComment: true
