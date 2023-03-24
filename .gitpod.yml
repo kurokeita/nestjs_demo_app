@@ -11,10 +11,11 @@ tasks:
       yarn install
       yarn prisma:generate
       yarn build
-      gp env DATABASE_URL="mysql://root@localhost:3306/nestjs_app"
-      gp env APP_PORT=3000
-      gp env JWT_EXPIRATION_TIME=900
-      gp env REFRESH_TOKEN_EXPIRATION_TIME=864000
+      export DATABASE_URL="mysql://root@localhost:3306/nestjs_app"
+      export APP_PORT=3000
+      export JWT_EXPIRATION_TIME=900
+      export REFRESH_TOKEN_EXPIRATION_TIME=864000
+      gp env DATABASE_URL=$DATABASE_URL APP_PORT=$APP_PORT JWT_EXPIRATION_TIME=$JWT_EXPIRATION_TIME REFRESH_TOKEN_EXPIRATION_TIME=$REFRESH_TOKEN_EXPIRATION_TIME
       eval $(gp env -e)
       yarn prisma:dev
       yarn prisma db seed
