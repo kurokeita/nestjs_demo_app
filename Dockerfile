@@ -3,7 +3,9 @@ FROM node:18.15.0-alpine3.16 AS development
 ARG NODE_ENV=development
 ENV NODE_ENV=${NODE_ENV}
 
-RUN apk add git && apk add openssh-client
+RUN apk add git \
+  && apk add openssh-client \
+  && apk add openssl
 
 USER node
 
