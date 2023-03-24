@@ -6,16 +6,11 @@
 
 tasks:
   - init: |
+      openssl genrsa -out storage/oauth/private.pem 2048
+      openssl rsa -in storage/oauth/private.pem -pubout -out storage/oauth/public.crt
       yarn install
       yarn prisma:generate
       yarn build
-    command: gp sync-done build
-  - init: |
-      gp sync-await build
-      openssl genrsa -out storage/oauth/private.pem 2048
-      openssl rsa -in storage/oauth/private.pem -pubout -out storage/oauth/public.crt
-    command: gp sync-done setup_env
-  - init: gp sync-await setup_env
     command: |
       cp .env.example .env
       yarn prisma:dev
